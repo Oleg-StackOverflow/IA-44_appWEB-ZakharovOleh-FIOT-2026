@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MODHUB — Знайомий світ. Нові правила.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;800&display=swap" rel="stylesheet">
+<style>
+  /* ===== ЗМІННІ ТА БАЗОВІ СТИЛІ ===== */
+  :root {
+    --bg: #101213; /* фон сторінки */
+    --card: #171a1b; /* фон карток */
+    --line: rgba(255,255,255,.08); /* тонкі межі */
+    --tx: #f2f3ee; /* основний колір тексту */
+    --mu: #8b9090; /* приглушений (другорядний) текст */
+    --ac: #c8f53c; /* акцентний лаймовий колір */
+    --acd: #1f2a14; /* темна підкладка під акцент */
+    --f: 'Inter Tight',system-ui,-apple-system,'Segoe UI',Arial,sans-serif; /* шрифт */
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--tx);
+    font: 400 14px/1.5 var(--f);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  button {
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--ac);
+    outline-offset: 2px;
+  }
+
+  /* ===== ЗАГАЛЬНІ КОМПОНЕНТИ: контейнер, секції, кнопки, мітки ===== */
+  .w {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  .sec {
+    padding: 56px 0 0;
+  }
+
+  .ey {
+    color: var(--ac);
+    font-size: 11px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  h2 {
+    font-size: 32px;
+    font-weight: 500;
+    letter-spacing: -.01em;
+  }
+
+  .hd {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 24px;
+    gap: 16px;
+  }
+
+  .more {
+    font-size: 12px;
+    color: var(--tx);
+    white-space: nowrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-weight: 500;
+    border: 1px solid var(--line);
+    background: #1c2021;
+  }
+
+  .btn.p {
+    background: var(--ac);
+    color: #10130a;
+    border-color: var(--ac);
+  }
+
+  .img {
+    background: var(--g) center/cover,#222;
+    position: relative;
+  }
+
+  .img::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(transparent 40%,rgba(0,0,0,.65));
+  }
+
+  .tag {
+    position: absolute;
+    z-index: 2;
+    top: 10px;
+    left: 10px;
+    font-size: 9px;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    padding: 3px 7px;
+    border-radius: 3px;
+    background: var(--ac);
+    color: #10130a;
+    font-weight: 600;
+  }
+
+  /* ===== ШАПКА САЙТУ ===== */
+  header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    border-bottom: 1px solid var(--line);
+  }
+
+  header .w {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .logo b {
+    display: grid;
+    place-items: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 5px;
+    background: var(--ac);
+    color: #10130a;
+    font-size: 14px;
+  }
+
+  nav {
+    display: flex;
+    gap: 28px;
+    font-size: 12px;
+    color: var(--mu);
+  }
+
+  nav a.on {
+    color: var(--ac);
+  }
+
+  .hr {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 12px;
+  }
+
+  /* ===== ГОЛОВНИЙ ЕКРАН ===== */
+  .hero {
+    min-height: 620px;
+    position: relative;
+    padding-top: 130px;
+    overflow: hidden;
+    --g: url('images/hero-zone.png');
+  }
+
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--g) 70% center/cover;
+  }
+
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg,rgba(16,18,19,.85),transparent 70%),linear-gradient(transparent 60%,var(--bg));
+  }
+
+  .hero .w {
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero h1 {
+    font-size: clamp(40px,6vw,64px);
+    font-weight: 800;
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: -.02em;
+  }
+
+  .hero h1 span {
+    color: var(--ac);
+    display: block;
+  }
+
+  .hero p {
+    margin: 20px 0 24px;
+    color: #c3c7c0;
+    max-width: 380px;
+  }
+
+  .hero .bt {
+    display: flex;
+    gap: 10px;
+  }
+
+  .stats {
+    display: flex;
+    gap: 28px;
+    margin-top: 100px;
+    font-size: 12px;
+    color: var(--mu);
+    align-items: center;
+  }
+
+  .stats b {
+    color: var(--tx);
+    font-weight: 600;
+  }
+
+  .focus {
+    position: absolute;
+    right: 32px;
+    bottom: 0;
+    width: 300px;
+    padding: 14px 16px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: rgba(23,26,27,.8);
+    backdrop-filter: blur(8px);
+  }
+
+  .focus small {
+    color: var(--ac);
+    font-size: 9px;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+  }
+
+  .focus div {
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .focus span {
+    color: var(--mu);
+    font-size: 11px;
+  }
+
+  /* ===== ПОШУК І КАТЕГОРІЇ ===== */
+  .search {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--card);
+  }
+
+  .search input {
+    flex: 1;
+    background: none;
+    border: 0;
+    color: var(--tx);
+    font: inherit;
+    padding: 8px 12px;
+  }
+
+  .search select {
+    background: none;
+    border: 0;
+    border-left: 1px solid var(--line);
+    color: var(--tx);
+    font: inherit;
+    padding: 8px 14px;
+  }
+
+  .search select option {
+    background: #171a1b;
+  }
+
+  .chips {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+  }
+
+  .chip {
+    padding: 8px 14px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: transparent;
+    font-size: 12px;
+    color: var(--mu);
+  }
+
+  .chip.on {
+    color: var(--ac);
+    border-color: var(--ac);
+    background: var(--acd);
+  }
+
+  /* ===== ІГРИ ===== */
+  .games {
+    display: grid;
+    grid-template-columns: repeat(6,1fr);
+    gap: 16px;
+  }
+
+  .game .img {
+    aspect-ratio: 1/1.1;
+    border-radius: 8px;
+    display: flex;
+    align-items: flex-end;
+    padding: 12px;
+    font-weight: 800;
+    font-size: 17px;
+    text-transform: uppercase;
+  }
+
+  .game .img i {
+    position: relative;
+    z-index: 2;
+    font-style: normal;
+    line-height: 1.1;
+  }
+
+  .game p {
+    margin-top: 10px;
+    font-size: 12px;
+  }
+
+  .game small {
+    color: var(--mu);
+    font-size: 11px;
+  }
+
+  /* ===== ПОПУЛЯРНІ МОДИ ===== */
+  .tabs {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    margin-bottom: 20px;
+    font-size: 12px;
+  }
+
+  .tabs button {
+    padding: 6px 12px;
+    border-radius: 5px;
+    background: none;
+    border: 0;
+    color: var(--mu);
+  }
+
+  .tabs button.on {
+    background: #262a2b;
+    color: var(--tx);
+  }
+
+  .tabs small {
+    margin-left: auto;
+    color: var(--mu);
+    font-size: 11px;
+  }
+
+  .mods {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 16px;
+  }
+
+  .mod {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--card);
+    overflow: hidden;
+  }
+
+  .mod .img {
+    height: 150px;
+  }
+
+  .mod .b {
+    padding: 14px;
+  }
+
+  .mod small {
+    color: var(--mu);
+    font-size: 11px;
+  }
+
+  .mod h3 {
+    font-size: 17px;
+    font-weight: 500;
+    margin: 4px 0 2px;
+  }
+
+  .mod p {
+    color: var(--mu);
+    font-size: 12px;
+    min-height: 54px;
+  }
+
+  .met {
+    display: flex;
+    gap: 14px;
+    font-size: 11px;
+    margin: 12px 0;
+    color: var(--mu);
+  }
+
+  .met b {
+    color: var(--ac);
+    font-weight: 500;
+  }
+
+  .ft {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid var(--line);
+    padding-top: 10px;
+    font-size: 11px;
+    color: var(--mu);
+  }
+
+  .ft em {
+    font-style: normal;
+    color: var(--ac);
+  }
+
+  /* ===== ПІДБІРКИ ===== */
+  .cur {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .cur .img {
+    height: 300px;
+    border-radius: 10px;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .cur .img>*:not(.tag) {
+    position: relative;
+    z-index: 2;
+  }
+
+  .cur h3 {
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 1.15;
+  }
+
+  .cur p {
+    color: #c3c7c0;
+    font-size: 12px;
+    margin-top: 6px;
+  }
+
+  .cur .r {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  /* ===== ТАБЛИЦЯ «ЩОЙНО В КАТАЛОЗІ» ===== */
+  .tb {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--card);
+    overflow-x: auto;
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: 2.6fr 1.4fr 1fr .7fr .7fr .8fr 40px;
+    gap: 12px;
+    align-items: center;
+    padding: 14px 20px;
+    border-top: 1px solid var(--line);
+    min-width: 820px;
+    font-size: 12px;
+    color: var(--mu);
+  }
+
+  .row.h {
+    border: 0;
+    font-size: 10px;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+  }
+
+  .who {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    color: var(--tx);
+  }
+
+  .who .img {
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    flex: none;
+  }
+
+  .who b {
+    display: block;
+    font-weight: 500;
+  }
+
+  .who small {
+    color: var(--mu);
+    font-size: 11px;
+  }
+
+  .who em {
+    color: var(--ac);
+    font-size: 9px;
+    font-style: normal;
+    margin-left: 6px;
+  }
+
+  .pill {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: #262a2b;
+    color: var(--tx);
+    font-size: 11px;
+  }
+
+  .dl {
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: none;
+  }
+
+  /* ===== МОД МІСЯЦЯ ===== */
+  .mm {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--card);
+  }
+
+  .mm .img {
+    min-height: 420px;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .mm .img>*:not(.tag) {
+    position: relative;
+    z-index: 2;
+  }
+
+  .mm .img b {
+    font-size: 44px;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  .mm .t {
+    padding: 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .mm h3 {
+    font-size: 36px;
+    font-weight: 400;
+    line-height: 1.1;
+  }
+
+  .mm p {
+    color: var(--mu);
+    max-width: 420px;
+  }
+
+  .nums {
+    display: flex;
+    gap: 36px;
+  }
+
+  .nums b {
+    display: block;
+    font-size: 20px;
+    font-weight: 500;
+  }
+
+  .nums small {
+    color: var(--mu);
+    font-size: 10px;
+  }
+
+  /* ===== ГАЙДИ ===== */
+  .gd {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 16px;
+  }
+
+  .gd .img {
+    height: 190px;
+    border-radius: 8px;
+  }
+
+  .gd small {
+    color: var(--ac);
+    font-size: 10px;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    display: block;
+    margin-top: 14px;
+  }
+
+  .gd h3 {
+    font-size: 19px;
+    font-weight: 600;
+    margin: 2px 0 4px;
+  }
+
+  .gd p {
+    color: var(--mu);
+    font-size: 12px;
+  }
+
+  /* ===== БЛОК «СТАТИ АВТОРОМ» ===== */
+  .cta {
+    border: 1px solid #3a4a22;
+    border-radius: 12px;
+    background: linear-gradient(135deg,#20290f,#161a12);
+    padding: 40px;
+  }
+
+  .cta .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+  }
+
+  .cta h2 {
+    font-size: 32px;
+    font-weight: 400;
+  }
+
+  .cta p {
+    color: var(--mu);
+    margin-top: 8px;
+    max-width: 420px;
+  }
+
+  .cta .nm {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .cta .nm div:not(.av) {
+    font-size: 26px;
+  }
+
+  .cta small {
+    font-size: 12px;
+    color: var(--mu);
+  }
+
+  .av {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    font-size: 11px;
+    color: var(--mu);
+  }
+
+  .av i {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #2a332a;
+    display: grid;
+    place-items: center;
+    font-style: normal;
+    color: var(--tx);
+    margin-right: -18px;
+    border: 2px solid #20290f;
+  }
+
+  /* ===== ЧАСТІ ПИТАННЯ ===== */
+  .faq {
+    display: grid;
+    grid-template-columns: 1fr 1.7fr;
+    gap: 60px;
+    padding-bottom: 80px;
+  }
+
+  .faq h2 {
+    font-size: 30px;
+  }
+
+  .faq p {
+    color: var(--mu);
+    margin: 12px 0;
+  }
+
+  details {
+    border-bottom: 1px solid var(--line);
+    padding: 18px 0;
+  }
+
+  summary {
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  summary::after {
+    content: "+";
+    color: var(--mu);
+  }
+
+  details[open] summary::after {
+    content: "−";
+  }
+
+  details[open] summary {
+    color: var(--ac);
+  }
+
+  details p {
+    font-size: 12px;
+    margin: 10px 0 0;
+  }
+
+  /* ===== ПІДВАЛ ===== */
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 48px 0 24px;
+  }
+
+  .fg {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    gap: 32px;
+  }
+
+  .fg h4 {
+    font-size: 10px;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--mu);
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+
+  .fg a {
+    display: block;
+    font-size: 12px;
+    margin-bottom: 8px;
+  }
+
+  .fg p {
+    color: var(--mu);
+    font-size: 12px;
+    margin: 12px 0;
+    max-width: 220px;
+  }
+
+  .fb {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    border-top: 1px solid var(--line);
+    margin-top: 32px;
+    padding-top: 16px;
+    font-size: 11px;
+    color: var(--mu);
+  }
+
+  /* Планшет */
+  @media (max-width:1000px) {
+    .games {
+      grid-template-columns: repeat(3,1fr);
+    }
+
+    .mods {
+      grid-template-columns: repeat(2,1fr);
+    }
+
+    .mm,
+    .cur,
+    .faq {
+      grid-template-columns: 1fr;
+    }
+
+    .gd {
+      grid-template-columns: 1fr;
+    }
+
+    .fg {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    nav {
+      display: none;
+    }
+
+    .focus {
+      display: none;
+    }
+  }
+
+  /* Телефон */
+  @media (max-width:600px) {
+    .w {
+      padding: 0 18px;
+    }
+
+    .games,
+    .mods {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .search {
+      flex-wrap: wrap;
+    }
+
+    .cta .top {
+      flex-direction: column;
+    }
+
+    .mm .t {
+      padding: 24px;
+    }
+
+    .hero h1 {
+      font-size: 38px;
+    }
+  }
+
+  /* Без анімації, якщо так налаштовано в системі */
+  @media (prefers-reduced-motion:reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+</style>
+</head>
+<body>
+<!-- ===== ШАПКА САЙТУ ===== -->
+<header><div class="w">
+ <a class="logo" href="#"><b>M</b>MODHUB</a>
+ <nav><a class="on" href="#">Моди</a><a href="#">Ігри</a><a href="#">Добірки</a><a href="#">Спільнота</a><a href="#">Гайди</a></nav>
+ <div class="hr"><span>UA ▾</span><a href="#">Увійти</a><a class="btn p" href="#" style="padding:7px 14px">Додати мод +</a></div>
+</div></header>
+
+<!-- ===== ГОЛОВНИЙ ЕКРАН ===== -->
+<section class="hero"><div class="w">
+ <div class="ey" style="font-size:9px">● Твоя гра. Твої правила.</div>
+ <h1>Знайомий світ.<span>Нові правила.</span></h1>
+ <p>Від маленьких покращень до повного переосмислення. Відкривай моди, з якими хочеться грати знову.</p>
+ <div class="bt"><a class="btn p" href="#catalog">Відкрити каталог ↗</a><a class="btn" href="#games">Обрати гру ⌨</a></div>
+ <div class="stats"><span><b>24 800+</b> модів</span><span><b>120+</b> ігор</span><span>✓ Перевірено спільнотою</span></div>
+ <a class="focus" href="#"><small>У фокусі • S.T.A.L.K.E.R. 2</small><div>Zone Reborn <span>↗</span></div><span>Зона, яку ти ще не бачив</span></a>
+</div></section>
+
+<!-- ===== ОСНОВНИЙ ВМІСТ ===== -->
+<main class="w" id="catalog">
+ <!-- ===== ПОШУК ===== -->
+<div class="search" style="margin-top:20px">
+  <span style="padding-left:10px">⌕</span><input type="search" placeholder="Який світ змінимо сьогодні?" aria-label="Пошук модів">
+  <select aria-label="Гра"><option>Усі ігри</option><option>S.T.A.L.K.E.R. 2</option><option>Skyrim SE</option><option>Minecraft</option></select>
+  <button class="btn p">Знайти моди ⌕</button>
+ </div>
+ <!-- ===== КАТЕГОРІЇ (кнопки створюються у скрипті) ===== -->
+<div class="chips" id="chips"></div>
+
+ <!-- ===== ІГРИ — «З чого почнемо?» (картки в #gl) ===== -->
+<section class="sec" id="games"><div class="hd"><div><div class="ey">Обери свій світ</div><h2>З чого почнемо?</h2></div><a class="more" href="#">Усі 120+ ігор ↗</a></div><div class="games" id="gl"></div></section>
+
+ <!-- ===== ПОПУЛЯРНІ МОДИ (вкладки #tabs, картки в #ml) ===== -->
+<section class="sec"><div class="hd"><div><div class="ey">На радарі спільноти</div><h2>Моди, про які говорять</h2></div><a class="more" href="#">Усі популярні моди ↗</a></div>
+  <div class="tabs" id="tabs"><button class="on">За тиждень</button><button>За місяць</button><button>За весь час</button><small>На основі завантажень та оцінок гравців</small></div>
+  <div class="mods" id="ml"></div></section>
+
+ <!-- ===== ПІДБІРКИ РЕДАКЦІЇ ===== -->
+<section class="sec"><div class="hd"><div><div class="ey">Відібрано вручну</div><h2>Менше пошуку. Більше відкриттів.</h2></div><a class="more" href="#">Усі добірки ↗</a></div>
+  <div class="cur">
+   <div class="img" style="--g:url('images/collection-graphics.png')"><div class="ey">Візуальне переосмислення</div><h3>Коли кожен кадр —<br>як перший.</h3><div class="r"><p>Графічні моди, заради яких варто повернутися.<br>18 модів • 6 ігор</p><a class="more" href="#">Дивитися добірку ↗</a></div></div>
+   <div class="img" style="--g:url('images/collection-localization.png')"><div class="ey">Грай своєю мовою</div><h3>Ті самі світи.<br>Тепер українською.</h3><div class="r"><p>Локалізації, створені нашою спільнотою.<br>32 моди • 14 ігор</p><a class="more" href="#">Дивитися добірку ↗</a></div></div>
+  </div></section>
+
+ <!-- ===== СВІЖІ ОНОВЛЕННЯ (таблиця в #tb) ===== -->
+<section class="sec"><div class="hd"><div><div class="ey">Завжди щось нове</div><h2>Щойно в каталозі</h2></div><a class="more" href="#">Усі оновлення ↗</a></div>
+  <div class="tb" id="tb"></div></section>
+
+ <!-- ===== МОД МІСЯЦЯ ===== -->
+<section class="sec"><div class="mm">
+  <div class="img" style="--g:url('images/month-skyrim.png')"><span class="tag">Мод місяця</span><small>THE ELDER SCROLLS V</small><b>Skyrim</b></div>
+  <div class="t"><div class="ey">Повернись туди, де все почалося</div><h3>Твій старий Skyrim.<br>Зовсім інші відчуття.</h3>
+   <p>Nordic Horizons — переосмислення півночі, де кожна стежка знову веде до відкриття. Нові текстури, світло та деталі без втрати духу оригіналу.</p>
+   <div class="nums"><div><b>4.9 / 5</b><small>оцінка гравців</small></div><div><b>65.8 тис.</b><small>завантажень</small></div><div><b>4K</b><small>якість текстур</small></div></div>
+   <div style="display:flex;align-items:center;gap:16px"><a class="btn p" href="#">Дослідити мод ↗</a><small style="color:var(--mu)">Створено Northwind</small></div></div>
+ </div></section>
+
+ <!-- ===== ГАЙДИ (картки в #gd) ===== -->
+<section class="sec"><div class="hd"><div><div class="ey">Розберемося разом</div><h2>Прокачай не лише гру</h2></div><a class="more" href="#">Усі матеріали ↗</a></div>
+  <div class="gd" id="gd"></div></section>
+
+ <!-- ===== СТАТИ АВТОРОМ ===== -->
+<section class="sec"><div class="cta">
+  <div class="top"><div><div class="ey">&lt;/&gt; Створюємо більше, ніж моди</div><h2>Твоя ідея може змінити чиюсь гру.</h2><p>Ділись своїми модами, отримуй відгуки та знаходь однодумців. Від першого ретушу до власного світу — ми поруч.</p></div>
+   <div style="text-align:center"><a class="btn p" href="#">Стати автором +</a><br><small style="display:block;margin-top:10px">Або долучайся в Discord ↗</small></div></div>
+  <div class="nm"><div class="av"><span><i>K</i><i>N</i><i>B</i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Тут уже твої однодумці</div>
+   <div>86 тис.+ <small>гравців</small></div><div>1 400+ <small>авторів</small></div><div>2.8 млн <small>завантажень</small></div></div>
+ </div></section>
+
+ <!-- ===== ЧАСТІ ПИТАННЯ ===== -->
+<section class="sec faq"><div><div class="ey">Перед першим запуском</div><h2>Маєш питання?<br>Це нормально.</h2><p>Допоможемо розібратися, щоб ти міг зосередитися на головному — грі.</p><a class="more" style="color:var(--ac)" href="#">Центр допомоги ↗</a></div>
+  <div>
+   <details open><summary>Чи безпечно завантажувати моди з MODHUB?</summary><p>Ми перевіряємо файли перед публікацією, а спільнота допомагає відстежувати якість. Завжди звертай увагу на версію гри, вимоги та відгуки на сторінці мода.</p></details>
+   <details><summary>Як встановити свій перший мод?</summary><p>Завантаж файл, розпакуй його в папку гри або скористайся менеджером модів. Інструкція є на сторінці кожного мода.</p></details>
+   <details><summary>Чи всі моди безкоштовні?</summary><p>Так, усі моди в каталозі доступні безкоштовно. Автори можуть додати посилання для підтримки.</p></details>
+   <details><summary>Як перевірити сумісність із моєю грою?</summary><p>На сторінці мода вказано версію гри та платформу. Порівняй їх зі своєю збіркою перед встановленням.</p></details>
+  </div></section>
+</main>
+
+<!-- ===== Низ сайту ===== -->
+<footer><div class="w">
+ <div class="fg">
+  <div><a class="logo" href="#"><b>M</b>MODHUB</a><p>Більше, ніж гра. Простір для тих, хто змінює знайомі світи.</p></div>
+  <div><h4>Відкривай</h4><a href="#">Усі моди</a><a href="#">Популярні ігри</a><a href="#">Добірки редакції</a><a href="#">Новинки тижня</a></div>
+  <div><h4>Долучайся</h4><a href="#">Стати автором</a><a href="#">Наша спільнота</a><a href="#">Discord</a><a href="#">Підтримати проєкт</a></div>
+  <div><h4>Допомога</h4><a href="#">Як встановити мод</a><a href="#">Правила платформи</a><a href="#">Питання та відповіді</a><a href="#">Зв'язатися з нами</a></div>
+ </div>
+ <div class="fb"><span>© 2026 MODHUB. Створено працями для гравців.</span><span><a href="#">Конфіденційність</a> &nbsp; <a href="#">Умови використання</a></span><span>З України, з любов'ю до ігор ♥</span></div>
+</div></footer>
+
+<!-- ===== СКРИПТ ===== -->
+<script>
+/* =====================================================================
+   MODHUB — скрипт сторінки
+   1) ДАНІ        — списки категорій, ігор, модів (редагуйте тут)
+   2) ФУНКЦІЇ      — кожна збирає HTML своєї секції
+   3) ЗАПУСК       — вставлення HTML на сторінку та підсвічування кнопок
+   ===================================================================== */
+
+
+/* ---------- 1. ДАНІ ---------- */
+
+// Категорії над списком ігор
+const categories = [
+  'Усі моди', 'Графіка', 'Геймплей', 'Нові світи',
+  'Персонажі', 'Локалізація', 'Інструменти',
+];
+
+// Ігри: назва, кількість модів, картинка, необов'язкова мітка
+const games = [
+  { name: 'S.T.A.L.K.E.R. 2', modsCount: '1 240 модів', image: 'images/game-stalker.png', badge: 'Гаряче' },
+  { name: 'Cyberpunk 2077',   modsCount: '3 860 модів', image: 'images/game-cyberpunk.png' },
+  { name: 'Skyrim SE',        modsCount: '8 420 модів', image: 'images/game-skyrim.png' },
+  { name: 'Minecraft',        modsCount: '4 180 модів', image: 'images/game-minecraft.png' },
+  { name: 'GTA V',            modsCount: '2 650 модів', image: 'images/game-gta.png' },
+  { name: 'The Witcher 3',    modsCount: '1 930 модів', image: 'images/game-witcher.png' },
+];
+
+// Популярні моди (картки «Моди, про які говорять»)
+const popularMods = [
+  {
+    badge: 'Вибір редакції', gameAndCategory: 'S.T.A.L.K.E.R. 2 / Графіка',
+    image: 'images/mod-zone.png', title: 'Zone Reborn', author: 'Kozak',
+    description: 'Жива погода, нове освітлення та справжня атмосфера відчуження.',
+    rating: '4.9', downloads: '28.4 тис.', size: '1.8 ГБ', version: 'v2.4 • PC',
+  },
+  {
+    badge: 'Популярне', gameAndCategory: 'Cyberpunk 2077 / Геймплей',
+    image: 'images/mod-cyberpunk.png', title: 'Night City Rewired', author: 'neonfox',
+    description: 'Розумніший трафік, живі вулиці й місто, що не засинає.',
+    rating: '4.8', downloads: '42.1 тис.', size: '640 МБ', version: 'v3.1 • PC',
+  },
+  {
+    badge: '4K текстури', gameAndCategory: 'Skyrim SE / Графіка',
+    image: 'images/mod-skyrim.png', title: 'Nordic Horizons', author: 'Northwind',
+    description: 'Північ у 4K: деталізовані ландшафти від Ріфтена до Солітьюда.',
+    rating: '4.9', downloads: '65.8 тис.', size: '4.2 ГБ', version: 'v1.8 • PC',
+  },
+  {
+    badge: 'Новинка', gameAndCategory: 'Minecraft / Нові світи',
+    image: 'images/mod-minecraft.png', title: 'Vanilla+ Adventures', author: 'blockfab',
+    description: 'Більше біомів і відкриттів. Той самий Minecraft, тільки глибший.',
+    rating: '4.7', downloads: '31.2 тис.', size: '320 МБ', version: 'v2.0 • PC',
+  },
+];
+
+// Свіжі оновлення (таблиця «Щойно в каталозі»); isNew — показати мітку NEW
+const latestMods = [
+  { title: 'Natural Light Overhaul', thumb: 'images/thumb-witcher.png',      author: 'LumenTeam',   game: 'The Witcher 3',    category: 'Графіка',      version: 'v2.8.1', size: '620 МБ', updated: '12 хв тому' },
+  { title: 'Кіберпанк: український голос', thumb: 'images/thumb-cyberpunk.png', author: 'Fonoi Mista', game: 'Cyberpunk 2077',   category: 'Локалізація', version: 'v1.0',   size: '2.4 ГБ', updated: '38 хв тому', isNew: true },
+  { title: 'Smart Inventory', thumb: 'images/thumb-stalker.png',             author: 'Kozak',       game: 'S.T.A.L.K.E.R. 2', category: 'Інтерфейс',    version: 'v1.4.2', size: '18 МБ',  updated: '1 год тому' },
+  { title: 'Wild Frontiers', thumb: 'images/thumb-minecraft.png',              author: 'blockfab',    game: 'Minecraft',        category: 'Нові світи',   version: 'v3.0',   size: '480 МБ', updated: '2 год тому', isNew: true },
+  { title: 'Los Santos Real Traffic', thumb: 'images/thumb-gta.png',     author: 'DriveMod',    game: 'GTA V',            category: 'Геймплей',     version: 'v4.2',   size: '156 МБ', updated: '3 год тому' },
+];
+
+// Гайди
+const guides = [
+  { label: 'Для початківців', image: 'images/guide-beginner.png', title: 'Перший мод? Почни тут.',
+    text: 'Від завантаження до запуску — без зайвих кроків і несподіванок.', readTime: '5 хв читання' },
+  { label: 'Практичний гайд', image: 'images/guide-conflicts.png', title: 'Моди без конфліктів',
+    text: 'Порядок завантаження, залежності та стабільна збірка: розкладаємо по поличках.', readTime: '8 хв читання' },
+  { label: 'Вибір редакції', image: 'images/guide-top10.png', title: '10 модів, що змінюють усе',
+    text: 'Наші фаворити для нового проходження знайомих ігор.', readTime: '6 хв читання' },
+];
+
+
+/* ---------- 2. ФУНКЦІЇ ---------- */
+
+// Скорочений запис для пошуку елемента за id
+const byId = (id) => document.getElementById(id);
+
+// Фон-картинка для блоку: передаємо шлях до файлу з папки images
+function imageStyle(path) {
+  return `--g:url('${path}')`;
+}
+
+// Кнопки категорій (перша активна)
+function renderCategories() {
+  return categories
+    .map((name, i) => `<button class="chip${i === 0 ? ' on' : ''}">${name}</button>`)
+    .join('');
+}
+
+// Картки ігор
+function renderGames() {
+  return games.map((game, i) => `
+    <a class="game" href="#">
+      <div class="img" style="${imageStyle(game.image)}">
+        ${game.badge ? `<span class="tag">${game.badge}</span>` : ''}
+        <i>${game.name}</i>
+      </div>
+      <p>${game.name}<br><small>${game.modsCount}</small></p>
+    </a>`).join('');
+}
+
+// Картки популярних модів
+function renderPopularMods() {
+  return popularMods.map((mod, i) => `
+    <article class="mod">
+      <div class="img" style="${imageStyle(mod.image)}"><span class="tag">${mod.badge}</span></div>
+      <div class="b">
+        <small>${mod.gameAndCategory}</small>
+        <h3>${mod.title}</h3>
+        <small>by ${mod.author}</small>
+        <p>${mod.description}</p>
+        <div class="met">
+          <span>☆ <b>${mod.rating}</b></span>
+          <span>⤓ ${mod.downloads}</span>
+          <span style="margin-left:auto">${mod.size}</span>
+        </div>
+        <div class="ft"><em>✓ Перевірено</em><span>${mod.version}</span></div>
+      </div>
+    </article>`).join('');
+}
+
+// Таблиця свіжих оновлень: рядок заголовка + по рядку на мод
+function renderLatestTable() {
+  const headerRow = `
+    <div class="row h">
+      <span>Мод / Автор</span><span>Гра</span><span>Категорія</span>
+      <span>Версія</span><span>Розмір</span><span>Оновлено ↓</span><span></span>
+    </div>`;
+
+  const modRows = latestMods.map((mod, i) => `
+    <div class="row">
+      <div class="who">
+        <div class="img" style="${imageStyle(mod.thumb)}"></div>
+        <div>
+          <b>${mod.title}${mod.isNew ? '<em>NEW</em>' : ''}</b>
+          <small>від ${mod.author}</small>
+        </div>
+      </div>
+      <span>${mod.game}</span>
+      <span><span class="pill">${mod.category}</span></span>
+      <span>${mod.version}</span>
+      <span>${mod.size}</span>
+      <span>${mod.updated}</span>
+      <button class="dl" aria-label="Завантажити">⤓</button>
+    </div>`).join('');
+
+  return headerRow + modRows;
+}
+
+// Картки гайдів
+function renderGuides() {
+  return guides.map((guide, i) => `
+    <a href="#">
+      <div class="img" style="${imageStyle(guide.image)}">
+        <span class="tag" style="background:#171a1bcc;color:var(--tx)">◷ ${guide.readTime}</span>
+      </div>
+      <small>${guide.label}</small>
+      <h3>${guide.title}</h3>
+      <p>${guide.text}</p>
+    </a>`).join('');
+}
+
+// Робить групу кнопок «перемикачем»: після кліку підсвічується лише натиснута.
+// Змінюється лише вигляд кнопки — список модів не фільтрується.
+function makeSwitchable(selector) {
+  const buttons = document.querySelectorAll(selector);
+  buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+      buttons.forEach((b) => b.classList.remove('on'));
+      button.classList.add('on');
+    });
+  });
+}
+
+
+/* ---------- 3. ЗАПУСК ---------- */
+
+byId('chips').innerHTML = renderCategories();
+byId('gl').innerHTML    = renderGames();
+byId('ml').innerHTML    = renderPopularMods();
+byId('tb').innerHTML    = renderLatestTable();
+byId('gd').innerHTML    = renderGuides();
+
+makeSwitchable('.chip');        // категорії
+makeSwitchable('#tabs button'); // вкладки «За тиждень / За місяць / За весь час»
+</script>
+</body>
+</html>
