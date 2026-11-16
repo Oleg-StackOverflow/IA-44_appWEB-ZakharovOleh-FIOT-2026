@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MODHUB — каталог модів</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Шапка сайту -->
+    <header class="header">
+        <div class="container header__inner">
+            <a href="index.html" class="logo">
+                <span class="logo__icon">M</span>
+                <span class="logo__text">MODHUB</span>
+            </a>
+
+            <nav class="header__nav">
+                <a href="about.html" class="link-accent">Про проєкт і бізнес-логіку</a>
+            </nav>
+
+            <div class="header__actions">
+                <a href="#" class="header__login">Увійти</a>
+                <a href="#" class="btn-outline">Додати мод <span class="arrow-down">&#9662;</span></a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- Пошук -->
+        <section class="catalog">
+            <h1>Каталог модів</h1>
+
+            <form class="search" action="#" method="get">
+                <svg class="search__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="7"></circle>
+                    <line x1="16.5" y1="16.5" x2="21" y2="21"></line>
+                </svg>
+                <input type="text" name="q" placeholder="Пошук модів та ігор" class="search__input">
+                <button type="submit" class="btn-accent">
+                    Знайти моди
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <circle cx="11" cy="11" r="7"></circle>
+                        <line x1="16.5" y1="16.5" x2="21" y2="21"></line>
+                    </svg>
+                </button>
+            </form>
+
+            <ul class="games">
+                <li><a href="#">S.T.A.L.K.E.R. 2</a></li>
+                <li><a href="#">Cyberpunk 2077</a></li>
+                <li><a href="#">Skyrim SE</a></li>
+                <li><a href="#">Minecraft</a></li>
+                <li><a href="#">GTA V</a></li>
+                <li><a href="#">The Witcher 3</a></li>
+            </ul>
+        </section>
+
+        <!-- Таблиця популярних модів -->
+        <section class="popular">
+            <h2>Популярні моди</h2>
+
+            <table class="mods-table">
+                <thead>
+                    <tr>
+                        <th>Мод</th>
+                        <th class="col-num">Оцінка</th>
+                        <th class="col-num">Завантаження</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="mod">
+                                <img src="images/zone-reborn.jpg" alt="Скриншот моду Zone Reborn" width="110" height="70">
+                                <div>
+                                    <p class="mod__meta">S.T.A.L.K.E.R. 2 / Графіка</p>
+                                    <h3 class="mod__name">Zone Reborn</h3>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="col-num"><span class="star">&#9734;</span> 4.9</td>
+                        <td class="col-num muted">&#10515; 25,4 тис.</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="mod">
+                                <img src="images/night-city.jpg" alt="Скриншот моду Night City Rewired" width="110" height="70">
+                                <div>
+                                    <p class="mod__meta">Cyberpunk 2077 / Геймплей</p>
+                                    <h3 class="mod__name">Night City Rewired</h3>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="col-num"><span class="star">&#9734;</span> 4.8</td>
+                        <td class="col-num muted">&#10515; 42,1 тис.</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="mod">
+                                <img src="images/nordic-horizons.jpg" alt="Скриншот моду Nordic Horizons" width="110" height="70">
+                                <div>
+                                    <p class="mod__meta">Skyrim SE / Графіка</p>
+                                    <h3 class="mod__name">Nordic Horizons</h3>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="col-num"><span class="star">&#9734;</span> 4.9</td>
+                        <td class="col-num muted">&#10515; 85,6 тис.</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="mod">
+                                <img src="images/vanilla-adventures.jpg" alt="Скриншот моду Vanilla+ Adventures" width="110" height="70">
+                                <div>
+                                    <p class="mod__meta">Minecraft / Нові світи</p>
+                                    <h3 class="mod__name">Vanilla+ Adventures</h3>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="col-num"><span class="star">&#9734;</span> 4.7</td>
+                        <td class="col-num muted">&#10515; 31,2 тис.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <div class="bottom">
+            <!-- Інструкція (списки) -->
+            <section class="howto">
+                <h2>Як користуватися</h2>
+
+                <h3>Встановлення мода</h3>
+                <ol>
+                    <li>Оберіть гру та знайдіть потрібний мод.</li>
+                    <li>Перевірте версію гри й вимоги мода.</li>
+                    <li>Завантажте мод і дотримуйтеся інструкції автора.</li>
+                </ol>
+
+                <h3>Перед запуском</h3>
+                <ul>
+                    <li>Зробіть резервну копію збережень.</li>
+                    <li>Перевірте сумісність з іншими модами.</li>
+                    <li>Використовуйте відповідну версію гри.</li>
+                </ul>
+            </section>
+
+            <!-- Форма зворотного зв'язку -->
+            <section class="feedback">
+                <h2>Зворотний зв'язок</h2>
+
+                <form action="#" method="post" class="feedback__form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Ім'я</label>
+                            <input type="text" id="name" name="name" placeholder="Ваше ім'я" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Електронна пошта</label>
+                            <input type="email" id="email" name="email" placeholder="name@example.com" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Повідомлення</label>
+                        <textarea id="message" name="message" rows="4" placeholder="Напишіть ваше запитання..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-accent">Надіслати повідомлення</button>
+                </form>
+            </section>
+        </div>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container footer__inner">
+            <p>&copy; 2026 MODHUB. Створено гравцями для гравців.</p>
+            <div class="footer__links">
+                <a href="#">Конфіденційність</a>
+                <a href="#">Умови використання</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
