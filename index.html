@@ -61,7 +61,7 @@
         </section>
 
         <!-- Таблиця популярних модів -->
-        <section class="popular">
+        <section id="popular">
             <h2>Популярні моди</h2>
 
             <table class="mods-table">
@@ -144,13 +144,18 @@
                 <h3>Перед запуском</h3>
                 <ul>
                     <li>Зробіть резервну копію збережень.</li>
-                    <li>Перевірте сумісність з іншими модами.</li>
+                    <li>Перевірте сумісність з іншими модами:
+                        <ul>
+                            <li>порядок завантаження модів;</li>
+                            <li>чи не змінюють моди одні й ті самі файли.</li>
+                        </ul>
+                    </li>
                     <li>Використовуйте відповідну версію гри.</li>
                 </ul>
             </section>
 
             <!-- Форма зворотного зв'язку -->
-            <section class="feedback">
+            <section id="feedback">
                 <h2>Зворотний зв'язок</h2>
 
                 <form action="#" method="post" class="feedback__form">
@@ -183,6 +188,7 @@
             <div class="footer__links">
                 <a href="#">Конфіденційність</a>
                 <a href="#">Умови використання</a>
+                <a href="https://github.com/" target="_blank">GitHub</a>
             </div>
         </div>
     </footer>
