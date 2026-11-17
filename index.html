@@ -6,7 +6,9 @@
     <title>MODHUB — каталог модів</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="css/style.css">
+    <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
 
@@ -18,21 +20,32 @@
                 <span class="logo__text">MODHUB</span>
             </a>
 
-            <nav class="header__nav">
-                <a href="about.html" class="link-accent">Про проєкт і бізнес-логіку</a>
-            </nav>
+            <button class="burger" type="button" aria-label="Відкрити меню" aria-expanded="false" aria-controls="menu">
+                <span class="burger__line"></span>
+                <span class="burger__line"></span>
+                <span class="burger__line"></span>
+            </button>
 
-            <div class="header__actions">
-                <a href="#" class="header__login">Увійти</a>
-                <a href="#" class="btn-outline">Додати мод <span class="arrow-down">&#9662;</span></a>
-            </div>
+            <nav class="nav" id="menu">
+                <ul class="nav__list">
+                    <li><a href="#popular" class="nav__link">Популярні</a></li>
+                    <li><a href="#categories" class="nav__link">Категорії</a></li>
+                    <li><a href="#howto" class="nav__link">Як користуватися</a></li>
+                    <li><a href="pages/about.html" class="nav__link link-accent">Про проєкт і бізнес-логіку</a></li>
+                </ul>
+
+                <div class="header__actions">
+                    <a href="#" class="header__login">Увійти</a>
+                    <a href="#" class="btn-outline">Додати мод <span class="arrow-down">&#9662;</span></a>
+                </div>
+            </nav>
         </div>
     </header>
 
     <main class="container">
 
         <!-- Пошук -->
-        <section class="catalog">
+        <section class="catalog reveal">
             <h1>Каталог модів</h1>
 
             <form class="search" action="#" method="get">
@@ -61,7 +74,7 @@
         </section>
 
         <!-- Таблиця популярних модів -->
-        <section id="popular">
+        <section id="popular" class="reveal">
             <h2>Популярні моди</h2>
 
             <table class="mods-table">
@@ -129,9 +142,41 @@
             </table>
         </section>
 
-        <div class="bottom">
+        <!-- Інформаційні картки -->
+        <section id="categories" class="reveal">
+            <h2>Категорії модів</h2>
+
+            <div class="cards">
+                <article class="card">
+                    <span class="card__icon">&#9728;</span>
+                    <h3 class="card__title">Графіка</h3>
+                    <p class="card__text">Текстури високої якості, освітлення, погода та пресети кольору.</p>
+                    <span class="card__count">1 240 модів</span>
+                </article>
+                <article class="card">
+                    <span class="card__icon">&#9881;</span>
+                    <h3 class="card__title">Геймплей</h3>
+                    <p class="card__text">Нові механіки, баланс зброї, штучний інтелект ворогів і економіка.</p>
+                    <span class="card__count">860 модів</span>
+                </article>
+                <article class="card">
+                    <span class="card__icon">&#9873;</span>
+                    <h3 class="card__title">Нові світи</h3>
+                    <p class="card__text">Додаткові локації, квести та сюжетні лінії від спільноти.</p>
+                    <span class="card__count">410 модів</span>
+                </article>
+                <article class="card">
+                    <span class="card__icon">&#9638;</span>
+                    <h3 class="card__title">Інтерфейс</h3>
+                    <p class="card__text">Зручніший інвентар, карта, мінімалістичний HUD і нові шрифти.</p>
+                    <span class="card__count">295 модів</span>
+                </article>
+            </div>
+        </section>
+
+        <div class="bottom reveal">
             <!-- Інструкція (списки) -->
-            <section class="howto">
+            <section class="howto" id="howto">
                 <h2>Як користуватися</h2>
 
                 <h3>Встановлення мода</h3>
@@ -193,5 +238,6 @@
         </div>
     </footer>
 
+    <script src="js/main.js"></script>
 </body>
 </html>
